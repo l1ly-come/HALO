@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>HALO</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📱</text></svg>" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/splash.css">
+
+  <link rel="stylesheet" href="css/glass.css" />
+
+ 
+
+</head>
+<body>
+
+  <div class="page-container">
+
+    <!-- 状态栏 -->
+    <div class="status-bar">
+      <span class="status-time" id="clock">00:00</span>
+      <div class="status-right">
+        <span class="status-signal">●●●●</span>
+        <span id="battery-text">100%</span>
+      </div>
+    </div>
+
+    <!-- 主卡片 -->
+    <div class="hero-card" id="hero-card">
+      <div class="hero-banner" id="hero-banner">
+        <div class="hero-banner-overlay"></div>
+      </div>
+      <div class="hero-avatar-wrap">
+        <div class="hero-avatar-ring" id="hero-avatar-ring">
+          <img id="hero-avatar" src="" alt="" class="interact-avatar-img" style="background:#E8E0E0" />
+        </div>
+        <button class="hero-avatar-edit" id="hero-avatar-edit" title="更换头像">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+      </div>
+      <div class="hero-body">
+        <div class="hero-date" id="date-text">2026/05/25</div>
+        <input type="text" id="main-input" class="hero-input" placeholder="What's on your mind?" autocomplete="off" />
+        <button class="hero-banner-edit" id="hero-banner-edit" title="更换背景">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- App Grid -->
+    <div class="app-grid">
+      <!-- Chat -->
+      <div class="app-cell" data-app="chat">
+        <div class="app-icon-wrap ig-gradient">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <span class="app-name">Chat</span>
+      </div>
+      <!-- Music -->
+      <div class="app-cell" data-app="music">
+        <div class="app-icon-wrap music-gradient">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+        </div>
+        <span class="app-name">Music</span>
+      </div>
+      <!-- Settings -->
+      <div class="app-cell" data-app="settings">
+        <div class="app-icon-wrap settings-gradient">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </div>
+        <span class="app-name">Settings</span>
+      </div>
+      <!-- Weverse -->
+      <div class="app-cell" data-app="pulse">
+        <div class="app-icon-wrap" style="background:#000;border-radius:0.7rem">
+          <svg width="20" height="14" viewBox="0 0 40 28" fill="#fff">
+            <polygon points="0,0 5,0 10,18 15,0 20,0 25,18 30,0 35,0 27,28 22,28 17,10 12,28 7,28"/>
+          </svg>
+        </div>
+        <span class="app-name">Weverse</span>
+      </div>
+      <!-- 相册 -->
+      <div class="app-cell" data-app="gallery">
+        <div class="app-icon-wrap" style="background:linear-gradient(135deg,#E8D5D5,#D5C0D0);border-radius:0.7rem">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8">
+            <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
+            <path d="m21 15-5-5L5 21"/>
+          </svg>
+        </div>
+        <span class="app-name">gallery</span>
+      </div>
+      <!-- 占卜 -->
+      <div class="app-cell" data-app="fortune">
+        <div class="app-icon-wrap" style="background:linear-gradient(135deg,#C8B8D0,#B8809B);border-radius:0.7rem">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8">
+            <circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h0"/>
+          </svg>
+        </div>
+        <span class="app-name">fortune</span>
+      </div>
+            <!-- 情绪天气 -->
+      <div class="app-cell" data-app="emotion">
+        <div class="app-icon-wrap" style="border-radius:0.7rem">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8">
+            <circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+          </svg>
+        </div>
+        <span class="app-name">Weather</span>
+      </div>
+      <!-- 随机抽签 -->
+      <div class="app-cell" data-app="draw">
+        <div class="app-icon-wrap" style="border-radius:0.7rem">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8">
+            <rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h0M15 15h0M9 15h0M15 9h0M12 12h0"/>
+          </svg>
+        </div>
+        <span class="app-name">Draw</span>
+      </div>
+
+    </div>
+
+
+
+    <!-- Dock -->
+    <div class="dock">
+      <div class="dock-item" data-app="worldbook">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        <span>World</span>
+      </div>
+      <div class="dock-item" data-app="memory">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        <span>Memory</span>
+      </div>
+      <div class="dock-item" data-app="style">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h0"/></svg>
+        <span>Bubble</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       Modal: Settings
+  ═══════════════════════════════════════ -->
+  <div class="modal-overlay" id="modal-settings">
+    <div class="modal-panel">
+      <div class="modal-header">
+        <span class="modal-title">Settings</span>
+        <button class="modal-close" data-close="settings">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <!-- API -->
+      <div class="settings-section">
+        <div class="settings-section-title">API</div>
+        <div class="settings-card">
+          <div class="settings-item">
+            <label class="settings-label">API Key</label>
+            <input type="password" id="set-api-key" class="s-input" placeholder="sk-..." />
+          </div>
+          <div class="settings-item">
+            <label class="settings-label">Base URL</label>
+            <input type="text" id="set-base-url" class="s-input" placeholder="https://..." />
+          </div>
+          <div class="settings-item">
+            <label class="settings-label">Model</label>
+            <div style="display:flex;gap:0.35rem">
+              <select id="set-model" class="s-select" style="flex:1">
+                <option value="gemini-1.5-flash">gemini-1.5-flash</option>
+              </select>
+              <button class="s-btn-sm" id="btn-fetch-models">Fetch</button>
+            </div>
+          </div>
+          <div class="settings-item">
+            <label class="settings-label">Temperature</label>
+            <div class="range-row">
+              <input type="range" id="set-temperature" class="s-range" min="0" max="2" step="0.1" value="0.8" />
+              <span class="range-val" id="temp-display">0.8</span>
+            </div>
+          </div>
+          <div class="s-btn-row">
+            <button class="s-btn" id="btn-save-api">Save</button>
+            <button class="s-btn s-btn-outline" id="btn-test-api">Test</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Theme -->
+      <div class="settings-section">
+        <div class="settings-section-title">THEME</div>
+        <div class="settings-card">
+          <div id="theme-lang-area"></div>
+
+        <div class="settings-item s-row">
+            <label class="settings-label">Dark Mode</label>
+            
+
+            <div class="dark-mode-toggle" id="theme-dark-toggle"></div>
+          </div>
+          <div class="settings-item">
+            <label class="settings-label">Font Family</label>
+            <select id="theme-font" class="s-select">
+              <option value="">System Default</option>
+              <option value="'PingFang SC',sans-serif">PingFang SC</option>
+              <option value="'Noto Sans SC',sans-serif">Noto Sans SC</option>
+              <option value="'Nanum Gothic',sans-serif">Nanum Gothic</option>
+              <option value="Georgia,serif">Georgia (Serif)</option>
+              <option value="'Courier New',monospace">Courier (Mono)</option>
+              <option value="'Segoe UI',sans-serif">Segoe UI</option>
+              <option value="__custom__">Custom (imported)</option>
+            </select>
+          </div>
+          <div class="settings-item" id="theme-custom-font-area">
+            <label class="settings-label">Import Font (.ttf / .woff / .woff2 / .otf)</label>
+            <div style="display:flex;gap:0.25rem;align-items:center">
+              <span id="theme-font-name" style="flex:1;font-size:0.7rem;color:var(--text-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">No custom font</span>
+              <button class="s-btn-sm" id="theme-font-upload">Upload</button>
+              <button class="s-btn-sm" id="theme-font-clear" style="color:var(--error)">Clear</button>
+            </div>
+            <div id="theme-font-preview" style="margin-top:0.3rem;padding:0.4rem 0.5rem;background:var(--surface-2);border-radius:var(--radius-sm);font-size:0.8rem;line-height:1.5;display:none">
+              The quick brown fox jumps over the lazy dog<br/>
+              你好世界 · 안녕하세요 · こんにちは
+            </div>
+          </div>
+          <div class="settings-item">
+            <label class="settings-label">Font Size: <strong id="theme-fs-val">15px</strong></label>
+            <input type="range" id="theme-fs" class="s-range" min="12" max="22" step="1" value="15" />
+          </div>
+          <div class="settings-item">
+            <label class="settings-label">Wallpaper</label>
+            <div style="display:flex;gap:0.25rem;align-items:center">
+              <input type="text" id="theme-wallpaper" class="s-input" placeholder="URL or pick local..." style="flex:1" />
+              <button class="s-btn-sm" id="theme-wall-pick">Pick</button>
+              <button class="s-btn-sm" id="theme-wall-clear">Clear</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- App Icons -->
+      <div class="settings-section">
+        <div class="settings-section-title">APP ICONS</div>
+        <div class="settings-card">
+          <div class="theme-icon-grid" id="theme-icon-grid"></div>
+          <button class="s-btn s-btn-outline" id="theme-icon-reset" style="width:100%;margin-top:0.3rem;font-size:0.7rem">Reset All Icons</button>
+        </div>
+      </div>
+
+      <!-- Data -->
+      <div class="settings-section">
+        <div class="settings-section-title">Data</div>
+        <div class="settings-card">
+          <div class="stat-bar-wrap">
+            <div class="stat-bar-label"><span>Storage</span><span id="stat-storage">0 KB</span></div>
+            <div class="stat-bar-track"><div class="stat-bar-fill" id="bar-storage" style="width:0%"></div></div>
+          </div>
+          <div class="stat-bar-wrap">
+            <div class="stat-bar-label"><span>Chats Today</span><span id="stat-chat-count">0</span></div>
+            <div class="stat-bar-track"><div class="stat-bar-fill" id="bar-chat" style="width:0%"></div></div>
+          </div>
+          <div class="stat-bar-wrap">
+            <div class="stat-bar-label"><span>Notes</span><span id="stat-note-size">0 KB</span></div>
+            <div class="stat-bar-track"><div class="stat-bar-fill" id="bar-note" style="width:0%"></div></div>
+          </div>
+          <div class="stat-bar-wrap">
+            <div class="stat-bar-label"><span>Tokens</span><span id="stat-token">0 / 1000</span></div>
+            <div class="stat-bar-track"><div class="stat-bar-fill" id="bar-token" style="width:0%"></div></div>
+          </div>
+          <div class="s-btn-row">
+            <button class="s-btn s-btn-outline" id="btn-export-data">Export</button>
+            <button class="s-btn s-btn-outline" id="btn-import-data">Import</button>
+            <button class="s-btn s-btn-danger" id="btn-clear-data">Clear All</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       Modal: Chat
+  ═══════════════════════════════════════ -->
+  <div class="modal-overlay" id="modal-chat">
+    <div class="modal-panel chat-social-panel">
+      <div class="modal-header">
+        <span class="modal-title">Chat</span>
+        <button class="modal-close" data-close="chat">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="chat-social-content" id="chat-tab-content"></div>
+      <div class="chat-tabbar">
+        <button class="chat-tab-btn active" data-tab="chat">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <span>Chats</span>
+        </button>
+        <button class="chat-tab-btn" data-tab="contacts">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span>Contacts</span>
+        </button>
+        <button class="chat-tab-btn" data-tab="moments">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+          <span>Moments</span>
+        </button>
+        <button class="chat-tab-btn" data-tab="profile">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span>Profile</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       Modal: Music
+  ═══════════════════════════════════════ -->
+  <div class="modal-overlay" id="modal-music">
+    <div class="modal-panel" id="music-panel"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       Modal: Weverse
+  ═══════════════════════════════════════ -->
+  <div class="modal-overlay" id="modal-pulse">
+    <div class="modal-panel" id="weverse-panel"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       Modal: Bubble
+  ═══════════════════════════════════════ -->
+  <div class="modal-overlay" id="modal-style">
+    <div class="modal-panel" id="bubble-panel"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       Modal: World Book
+  ═══════════════════════════════════════ -->
+  <div class="modal-overlay" id="modal-worldbook">
+    <div class="modal-panel">
+      <div class="modal-header">
+        <span class="modal-title">World Book</span>
+        <button class="modal-close" data-close="worldbook">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div id="worldbook-content"></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       Modal: Memory
+  ═══════════════════════════════════════ -->
+  <div class="modal-overlay" id="modal-memory">
+    <div class="modal-panel">
+      <div class="modal-header">
+        <span class="modal-title">Memory</span>
+        <button class="modal-close" data-close="memory">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div id="memory-content"></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       Modal: Gallery (相册)
+  ═══════════════════════════════════════ -->
+  <div class="modal-overlay" id="modal-gallery">
+    <div class="modal-panel" id="gallery-panel"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       Modal: Fortune (占卜)
+  ═══════════════════════════════════════ -->
+  <div class="modal-overlay" id="modal-fortune">
+    <div class="modal-panel" id="fortune-panel"></div>
+  </div>
+    <!-- Modal: Emotion Weather -->
+  <div class="modal-overlay" id="modal-emotion">
+    <div class="modal-panel" id="emotion-panel"></div>
+  </div>
+
+  <!-- Modal: Random Draw -->
+  <div class="modal-overlay" id="modal-draw">
+    <div class="modal-panel" id="draw-panel"></div>
+  </div>
+
+
+  <!-- ═══ Scripts ═══ -->
+   <script src="js/splash.js"></script>
+
+
+  <script src="js/storage.js"></script>
+  <script src="js/toast.js"></script>
+  <script src="js/prompts.js"></script>
+  <script src="js/worldbook.js"></script>
+  <script src="js/memory.js"></script>
+  <script src="js/style.js"></script>
+  <script src="js/clock.js"></script>
+  <script src="js/settings.js"></script>
+  <script src="js/music.js"></script>
+  <script src="js/media-parse.js"></script>
+
+  <script src="js/weverse.js"></script>
+  <script src="js/live.js"></script>
+
+  <script src="js/bubble.js"></script>
+  <script src="js/chat.js"></script>
+  <script src="js/gallery.js"></script>
+  <script src="js/fortune.js"></script>
+<script src="js/emotion.js"></script>
+  <script src="js/random-draw.js"></script>
+    <script src="js/lang.js"></script>
+
+  <script src="js/app.js"></script>
+  
+
+</body>
+</html>
