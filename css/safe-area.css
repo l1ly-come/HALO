@@ -1,225 +1,237 @@
-/* ═══ Safe Area 全机型适配 ═══
- * 解决：刘海/灵动岛/底部Home条/状态栏遮挡
- * 适配：iOS Safari PWA、Android Chrome、所有浏览器书签模式
+/* ═══ Safe Area v3 — 精确适配 ═══
+ * 基于 index.html 实际结构
+ * .page-container > .status-bar / .hero-card / .app-grid / .dock
+ * .modal-overlay > .modal-panel
+ * .chat-social-panel 底部是 .chat-tabbar
+ * .conv-wrap 顶部 .conv-header 底部 .chat-input-bar
  */
 
-/* ── 根容器撑满全屏 ── */
-html, body {
-  padding: 0;
-  margin: 0;
-  width: 100%;
+/* ── 基础 ── */
+html {
+  background: var(--bg, #f5f0eb);
   height: 100%;
-  /* iOS 橡皮筋滚动修复 */
-  overflow: hidden;
+}
+[data-theme="dark"] html {
+  background: var(--bg, #0a0a0c);
+}
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
   overscroll-behavior: none;
-  -webkit-overflow-scrolling: touch;
+  -webkit-text-size-adjust: 100%;
 }
 
-/* ── CSS 变量：安全区域 ── */
-:root {
-  /* 安全距离 fallback（不支持 env() 的浏览器用 0） */
-  --sat: env(safe-area-inset-top, 0px);
-  --sab: env(safe-area-inset-bottom, 0px);
-  --sal: env(safe-area-inset-left, 0px);
-  --sar: env(safe-area-inset-right, 0px);
-
-  /* 顶部实际高度 = 安全区 + 内容padding */
-  --header-safe: calc(env(safe-area-inset-top, 0px) + 0px);
-  --dock-safe: calc(env(safe-area-inset-bottom, 0px) + 0px);
-}
-
-/* ═══ 主页 ═══ */
-
-/* 主页整体容器 — 顶部留出安全区 */
-.home-screen,
-.main-screen,
-[data-screen="home"] {
+/* ═══════════════════════════════════
+   1. 主页 .page-container
+═══════════════════════════════════ */
+.page-container {
   padding-top: env(safe-area-inset-top, 0px) !important;
   padding-left: env(safe-area-inset-left, 0px) !important;
   padding-right: env(safe-area-inset-right, 0px) !important;
+  box-sizing: border-box;
 }
 
-/* ── 底部 Dock ── */
-.dock,
-.dock-bar,
-.app-dock {
-  padding-bottom: env(safe-area-inset-bottom, 0px) !important;
-  /* 也可以用 max() 保证最小间距 */
+/* 自定义状态栏跟随安全区（已被 page-container 推下） */
+.status-bar {
+  /* 不需要额外 padding，父容器已处理 */
+}
+
+/* Dock 底部留出 Home Indicator */
+.dock {
   padding-bottom: max(8px, env(safe-area-inset-bottom, 0px)) !important;
 }
 
-/* ═══ 聊天模块 ═══ */
+/* ═══════════════════════════════════
+   2. Modal 通用
+═══════════════════════════════════ */
+.modal-overlay {
+  /* overlay 本身撑满屏幕，不加 padding */
+}
 
-/* 聊天顶部 header — 留出刘海/灵动岛 */
-.conv-header,
-.chat-header {
+.modal-panel {
   padding-top: env(safe-area-inset-top, 0px) !important;
-  /* 总高度 = 安全区 + 原始高度 */
-}
-
-/* 聊天 tab 栏如果在顶部 */
-.chat-tabbar {
-  padding-top: env(safe-area-inset-top, 0px) !important;
-}
-
-/* 聊天底部输入栏 — 留出 Home Indicator */
-.chat-input-bar {
   padding-bottom: env(safe-area-inset-bottom, 0px) !important;
+  box-sizing: border-box !important;
 }
 
-/* ═══ 所有 Modal 模块 ═══ */
-
-/* modal 全屏面板 */
-.modal-panel,
-.modal-overlay,
-[class*="modal-"] > .ly-app,
-[class*="modal-"] > .wv2-app,
-[class*="modal-"] > .fort-app,
-[class*="modal-"] > .draw-app,
-[class*="modal-"] > .emo-app,
-[class*="modal-"] > .gal-app {
-  padding-top: env(safe-area-inset-top, 0px);
-  padding-bottom: env(safe-area-inset-bottom, 0px);
-}
-
-/* Weverse 导航栏 */
-.wv2-nav {
-  padding-bottom: env(safe-area-inset-bottom, 0px) !important;
-}
-
-/* Bubble 导航 */
-.ly-nav {
-  padding-bottom: env(safe-area-inset-bottom, 0px) !important;
-}
-
-/* Bubble 输入区 */
-.ly-input-area {
-  padding-bottom: env(safe-area-inset-bottom, 0px) !important;
-}
-
-/* Weverse DM 输入区 */
-.wv2-dm-bar {
-  padding-bottom: env(safe-area-inset-bottom, 0px) !important;
-}
-
-/* Weverse Live 输入区 */
-.wvl-input-bar {
-  padding-bottom: env(safe-area-inset-bottom, 0px) !important;
-}
-
-/* ═══ 各模块 header 顶部安全区 ═══ */
-
-/* Gallery */
-.gal-header {
-  padding-top: env(safe-area-inset-top, 0px) !important;
-}
-
-/* Fortune */
-.fort-header {
-  padding-top: env(safe-area-inset-top, 0px) !important;
-}
-
-/* Emotion */
-.emo-header {
-  padding-top: env(safe-area-inset-top, 0px) !important;
-}
-
-/* Draw */
-.draw-header {
-  padding-top: env(safe-area-inset-top, 0px) !important;
-}
-
-/* Music */
+/* modal 顶部 header */
 .modal-header {
-  padding-top: env(safe-area-inset-top, 0px) !important;
+  /* 已由 .modal-panel padding-top 推下，不需要额外 padding */
+  position: relative;
+  z-index: 10;
 }
 
-/* Bubble header */
-.ly-hdr {
+/* ═══════════════════════════════════
+   3. Chat 模块（关键修复）
+═══════════════════════════════════ */
+
+/* Chat modal 面板 */
+.chat-social-panel {
+  display: flex !important;
+  flex-direction: column !important;
   padding-top: env(safe-area-inset-top, 0px) !important;
+  /* 底部由 chat-tabbar 处理 */
+  padding-bottom: 0 !important;
 }
 
-/* Bubble chat header */
-.ly-chat-header {
-  padding-top: env(safe-area-inset-top, 0px) !important;
+/* Chat 内容区填满中间 */
+.chat-social-content,
+#chat-tab-content {
+  flex: 1 !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch;
+  min-height: 0; /* flex 子元素溢出修复 */
 }
 
-/* Weverse header */
-.wv2-artist-bar:first-child {
-  padding-top: env(safe-area-inset-top, 0px) !important;
+/* ★ chat-tabbar 在底部！给 bottom 安全区 ★ */
+.chat-tabbar {
+  padding-top: 0 !important; /* 清除 v1 错误 */
+  padding-bottom: max(4px, env(safe-area-inset-bottom, 0px)) !important;
+  flex-shrink: 0 !important;
 }
 
+/* 对话页 header（JS 动态生成） */
+.conv-header {
+  padding-top: calc(env(safe-area-inset-top, 0px) + 6px) !important;
+  flex-shrink: 0 !important;
+}
+
+/* 对话容器布局 */
+.conv-wrap {
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* 消息区域 */
+.chat-messages,
+#conv-messages {
+  flex: 1 !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch;
+  min-height: 0;
+}
+
+/* 输入栏在底部 */
+.chat-input-bar {
+  padding-bottom: max(4px, env(safe-area-inset-bottom, 0px)) !important;
+  flex-shrink: 0 !important;
+}
+
+/* action sheet 跟随输入栏 */
+.action-sheet {
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 48px) !important;
+}
+
+/* ═══════════════════════════════════
+   4. Weverse
+═══════════════════════════════════ */
+.wv2-app {
+  padding-top: env(safe-area-inset-top, 0px) !important;
+  padding-bottom: 0 !important;
+}
+.wv2-nav {
+  padding-bottom: max(4px, env(safe-area-inset-bottom, 0px)) !important;
+}
 .wv2-page-hdr {
-  padding-top: env(safe-area-inset-top, 0px) !important;
+  padding-top: 4px !important; /* 已由 wv2-app 推下 */
 }
-
 .wv2-dm-hdr {
-  padding-top: env(safe-area-inset-top, 0px) !important;
+  padding-top: calc(env(safe-area-inset-top, 0px) + 4px) !important;
 }
-
 .wv2-detail-hdr {
-  padding-top: env(safe-area-inset-top, 0px) !important;
+  padding-top: calc(env(safe-area-inset-top, 0px) + 4px) !important;
+}
+.wv2-dm-bar {
+  padding-bottom: max(4px, env(safe-area-inset-bottom, 0px)) !important;
+}
+.wv2-artist-bar {
+  /* 已由 wv2-app 推下 */
 }
 
-/* Weverse Live 顶部 */
+/* Weverse Live */
 .wvl-overlay-top {
-  padding-top: env(safe-area-inset-top, 0px) !important;
+  padding-top: calc(env(safe-area-inset-top, 0px) + 4px) !important;
+}
+.wvl-input-bar {
+  padding-bottom: max(4px, env(safe-area-inset-bottom, 0px)) !important;
 }
 
-/* ═══ Inner Modal 弹窗（居中的不需要，但全屏的需要）═══ */
+/* ═══════════════════════════════════
+   5. Bubble
+═══════════════════════════════════ */
+.ly-app {
+  padding-top: env(safe-area-inset-top, 0px) !important;
+  padding-bottom: 0 !important;
+}
+.ly-hdr {
+  /* 已由 ly-app 推下 */
+}
+.ly-chat-header {
+  padding-top: calc(env(safe-area-inset-top, 0px) + 4px) !important;
+}
+.ly-nav {
+  padding-bottom: max(4px, env(safe-area-inset-bottom, 0px)) !important;
+}
+.ly-input-area {
+  padding-bottom: max(4px, env(safe-area-inset-bottom, 0px)) !important;
+}
+
+/* ═══════════════════════════════════
+   6. Gallery / Fortune / Emotion / Draw
+   这些 JS 动态渲染在 .modal-panel 里
+   .modal-panel 已有 safe area padding
+   但它们自己的 header 可能需要微调
+═══════════════════════════════════ */
+.gal-app, .fort-app, .emo-app, .draw-app {
+  /* 已在 .modal-panel 内，不需要额外顶部安全区 */
+}
+.gal-header, .fort-header, .emo-header, .draw-header {
+  /* 已由父容器 .modal-panel 推下 */
+}
+
+/* ═══════════════════════════════════
+   7. Settings More Panel
+═══════════════════════════════════ */
+.conv-more-panel {
+  padding-top: env(safe-area-inset-top, 0px) !important;
+}
+.conv-more-inner {
+  padding-bottom: env(safe-area-inset-bottom, 0px) !important;
+}
+
+/* ═══════════════════════════════════
+   8. Inner Modal（居中弹窗）
+═══════════════════════════════════ */
 .inner-modal-overlay {
   padding-top: env(safe-area-inset-top, 0px);
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
-/* ═══ 设置页 ═══ */
-.conv-more-panel .conv-more-inner {
-  padding-top: env(safe-area-inset-top, 0px) !important;
-  padding-bottom: env(safe-area-inset-bottom, 0px) !important;
-}
-
-/* ═══ 通知条 ═══ */
-.notif-bar {
-  top: env(safe-area-inset-top, 0px) !important;
-}
-
-/* ═══ Toast ═══ */
+/* ═══════════════════════════════════
+   9. 浮动元素
+═══════════════════════════════════ */
 .toast-container {
   top: calc(env(safe-area-inset-top, 0px) + 12px) !important;
 }
-
-/* ═══ Lightbox ═══ */
-.lightbox-overlay {
-  padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
+.notif-bar {
+  top: calc(env(safe-area-inset-top, 0px) + 4px) !important;
 }
-
-/* ═══ Splash ═══ */
+.lightbox-overlay {
+  padding: env(safe-area-inset-top, 0px) 0 env(safe-area-inset-bottom, 0px) 0;
+}
 .splash-screen {
   padding-top: env(safe-area-inset-top, 0px);
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
-/* ═══ 横屏适配（左右安全区）═══ */
-@media (orientation: landscape) {
-  .dock,
-  .dock-bar,
-  .app-dock {
-    padding-left: env(safe-area-inset-left, 0px) !important;
-    padding-right: env(safe-area-inset-right, 0px) !important;
-  }
+/* ═══════════════════════════════════
+   10. standalone 模式（添加到桌面）
+═══════════════════════════════════ */
+@media (display-mode: standalone), (display-mode: fullscreen) {
 
-  .conv-header,
-  .chat-input-bar,
-  .chat-tabbar {
-    padding-left: env(safe-area-inset-left, 0px) !important;
-    padding-right: env(safe-area-inset-right, 0px) !important;
-  }
-}
-
-/* ═══ standalone 模式额外修复（添加到桌面后）═══ */
-@media (display-mode: standalone),
-       (display-mode: fullscreen) {
-  /* 确保背景色延伸到安全区 */
+  /* 背景色延伸到安全区 */
   body {
     background-color: var(--bg, #f5f0eb);
   }
@@ -227,36 +239,56 @@ html, body {
     background-color: var(--bg, #0a0a0c);
   }
 
-  /* standalone 模式下顶部额外保护 */
-  .conv-header,
-  .chat-tabbar {
+  /* 对话 header 毛玻璃固定 */
+  .conv-header {
     position: sticky;
     top: 0;
     z-index: 100;
+    background: rgba(255,255,255,0.85);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+  }
+  [data-theme="dark"] .conv-header {
+    background: rgba(26,26,30,0.85);
+  }
+
+  /* 输入栏固定底部 */
+  .chat-input-bar {
+    position: sticky;
+    bottom: 0;
+    z-index: 100;
     background: var(--surface, #fff);
   }
-  [data-theme="dark"] .conv-header,
-  [data-theme="dark"] .chat-tabbar {
+  [data-theme="dark"] .chat-input-bar {
     background: var(--surface, #1a1a1e);
   }
 }
 
-/* ═══ 特定机型修复 ═══ */
-
-/* iPhone X/XS/11 Pro/12 mini — 底部34px */
-@supports (padding-bottom: env(safe-area-inset-bottom)) {
-  .dock, .app-dock, .dock-bar {
-    /* 确保 env() 生效 */
-    padding-bottom: env(safe-area-inset-bottom, 0px) !important;
+/* ═══════════════════════════════════
+   11. 横屏
+═══════════════════════════════════ */
+@media (orientation: landscape) {
+  .page-container,
+  .conv-header,
+  .chat-input-bar,
+  .chat-tabbar,
+  .dock {
+    padding-left: env(safe-area-inset-left, 0px) !important;
+    padding-right: env(safe-area-inset-right, 0px) !important;
   }
 }
 
-/* 不支持 env() 的旧浏览器 fallback */
-@supports not (padding-bottom: env(safe-area-inset-bottom)) {
-  .dock, .app-dock, .dock-bar {
-    padding-bottom: 8px !important;
+/* ═══════════════════════════════════
+   12. 旧浏览器 fallback
+═══════════════════════════════════ */
+@supports not (padding: env(safe-area-inset-top)) {
+  .page-container {
+    padding-top: 24px !important;
   }
-  .conv-header, .chat-tabbar {
-    padding-top: 20px !important; /* 旧 iOS 状态栏高度 */
+  .conv-header {
+    padding-top: 30px !important;
+  }
+  .dock, .chat-tabbar, .chat-input-bar {
+    padding-bottom: 12px !important;
   }
 }
