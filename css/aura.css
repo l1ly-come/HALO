@@ -1,0 +1,36 @@
+/* 确保背景始终有颜色，即使图片加载失败 */
+.halo-bg {
+    position: fixed;
+    inset: 0;
+    background: #f5f0eb; /* 浅色背景 */
+    z-index: -2;
+}
+
+[data-theme="dark"] .halo-bg {
+    background: #0a0a0c; /* 深色背景 */
+}
+
+.halo-aura {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    width: 150vw;
+    height: 150vw;
+    background: radial-gradient(circle, rgba(163,131,247,0.2) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    animation: auraPulse 10s ease-in-out infinite alternate;
+}
+
+
+@keyframes auraPulse {
+    from { transform: translate(-50%, -50%) scale(0.8); opacity: 0.5; }
+    to { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+}
+
+.halo-stars {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, #ffffff 1px, transparent 1px);
+    background-size: 80px 80px;
+    opacity: 0.05;
+}

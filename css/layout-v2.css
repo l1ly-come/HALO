@@ -1,0 +1,109 @@
+/* ═══ HALO Airy Glass 旗舰版 ═══ */
+:root {
+    --text-color: #5a5a5a;
+    --glass-bg: rgba(255, 255, 255, 0.45);
+    --glass-border: rgba(255, 255, 255, 0.7);
+    --blur: blur(50px) saturate(180%);
+}
+
+[data-theme="dark"] {
+    --text-color: #ffffff;
+    --glass-bg: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+html, body {
+    height: 100%; width: 100%; margin: 0; padding: 0;
+    overflow: hidden; /* 严禁滚动 */
+    background: #fdfdfd;
+}
+
+.main-wallpaper {
+    position: fixed; inset: 0; z-index: -2;
+    background-size: cover; background-position: center;
+}
+
+.page-container {
+    height: 100%; display: flex; flex-direction: column;
+    padding: env(safe-area-inset-top) 28px calc(env(safe-area-inset-bottom) + 20px);
+    box-sizing: border-box;
+    z-index: 1;
+}
+
+/* 状态栏：参考图中那种若有若无的感觉 */
+.status-bar-airy {
+    height: 44px; display: flex; justify-content: space-between; align-items: center;
+    font-size: 14px; font-weight: 300; color: var(--text-color); opacity: 0.7;
+}
+
+/* 英雄区：去卡片化，让内容直接浮在背景上 */
+.hero-section-v4 {
+    margin: 40px 0 20px;
+    display: flex; flex-direction: column; align-items: center;
+    gap: 25px;
+}
+
+.avatar-ring {
+    position: relative; width: 105px; height: 105px;
+    background: #fff; padding: 5px; border-radius: 42px; /* 圆角矩形头像 */
+    box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+}
+.avatar-ring img {
+    width: 100%; height: 100%; border-radius: 38px; object-fit: cover;
+}
+.edit-btn-mini {
+    position: absolute; bottom: -5px; right: -5px; width: 26px; height: 26px;
+    background: #fff; border: 1px solid #eee; border-radius: 50%; font-size: 16px;
+}
+
+.status-tag {
+    padding: 6px 18px; background: var(--glass-bg); backdrop-filter: var(--blur);
+    border-radius: 20px; font-size: 13px; color: var(--text-color);
+    border: 1px solid var(--glass-border);
+}
+
+.airy-input {
+    width: 100%; background: transparent; border: none; text-align: center;
+    font-size: 20px; font-weight: 200; color: var(--text-color); outline: none;
+}
+
+/* App 宫格：保持 4 列，材质升级 */
+.app-grid-v4 {
+    flex: 1; display: grid; grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, auto); gap: 24px 15px; align-content: flex-start;
+    margin-top: 20px;
+}
+.app-cell {
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+    cursor: pointer;
+}
+.icon-canvas {
+    width: 60px; height: 60px;
+    background: var(--glass-bg); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur);
+    border: 1px solid var(--glass-border); border-radius: 20px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; color: #666;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.02);
+}
+.icon-canvas svg { width: 28px; height: 28px; stroke: #555; }
+.app-name { font-size: 11px; font-weight: 500; opacity: 0.6; }
+
+/* 底部 Dock 胶囊 */
+.dock-v4 {
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(60px) saturate(210%);
+    -webkit-backdrop-filter: blur(60px) saturate(210%);
+    border: 1px solid var(--glass-border);
+    padding: 12px 10px; border-radius: 40px;
+    display: flex; justify-content: space-around;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+}
+.dock-btn svg { width: 24px; height: 24px; color: #444; opacity: 0.6; }
+
+/* ═══ 关键修复：防止遮挡 ═══ */
+.modal-overlay {
+    pointer-events: none; opacity: 0; visibility: hidden;
+}
+.modal-overlay.active {
+    pointer-events: auto; opacity: 1; visibility: visible; z-index: 10000;
+}

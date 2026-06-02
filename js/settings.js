@@ -196,12 +196,12 @@
 
     var APPS = [
     { key: 'chat', name: 'Chat' },
-    { key: 'music', name: 'Music' },
+    
     { key: 'settings', name: 'Settings' },
     { key: 'pulse', name: 'Weverse' },
     { key: 'gallery', name: 'Gallery' },
     { key: 'fortune', name: 'Fortune' },
-    { key: 'emotion', name: 'Weather' },
+   
     { key: 'draw', name: 'Draw' }
   ];
 

@@ -1,0 +1,251 @@
+/* ═══ Home Widgets ═══ */
+
+.widget-row {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 0.5rem;
+  opacity: 0;
+  animation: fadeUp 0.4s 0.15s var(--ease) forwards;
+}
+
+/* ── Music Widget ── */
+.widget-music-wide {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.75rem 0.85rem;
+  background: var(--surface);
+  backdrop-filter: var(--glass);
+  -webkit-backdrop-filter: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: transform 0.12s, box-shadow 0.12s;
+  overflow: hidden;
+  min-height: 64px;
+}
+.widget-music-wide:active {
+  transform: scale(0.97);
+}
+
+.w-m-disc-wrap {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+}
+.w-m-disc {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #777 0%, #333 35%, #3a3a3a 55%, #444 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+}
+.w-m-disc::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #e8e8e8, #aaa 50%, #888);
+}
+.widget-music-wide.playing .w-m-disc {
+  animation: spin 4s linear infinite;
+}
+
+.w-m-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.w-m-title {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: -0.01em;
+}
+.w-m-artist {
+  font-size: 0.5rem;
+  color: var(--text-3);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 400;
+}
+.w-m-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 14px;
+  margin-left: auto;
+  flex-shrink: 0;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.widget-music-wide.playing .w-m-bars {
+  opacity: 0.4;
+}
+.w-m-bars span {
+  display: block;
+  width: 2px;
+  border-radius: 1px;
+  background: var(--text-3);
+  animation: waveform 0.6s ease-in-out infinite;
+  animation-play-state: paused;
+}
+.widget-music-wide.playing .w-m-bars span {
+  animation-play-state: running;
+}
+.w-m-bars span:nth-child(1) { height: 4px; animation-delay: 0s; }
+.w-m-bars span:nth-child(2) { height: 10px; animation-delay: 0.15s; }
+.w-m-bars span:nth-child(3) { height: 6px; animation-delay: 0.3s; }
+.w-m-bars span:nth-child(4) { height: 12px; animation-delay: 0.1s; }
+
+/* ── Weather / Emotion Widget ── */
+.widget-square {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 0.5rem;
+  background: var(--surface);
+  backdrop-filter: var(--glass);
+  -webkit-backdrop-filter: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: transform 0.12s;
+  min-height: 64px;
+  gap: 0.15rem;
+}
+.widget-square:active {
+  transform: scale(0.96);
+}
+
+.w-icon {
+  font-size: 1.4rem;
+  line-height: 1;
+  transition: transform 0.3s var(--ease-bounce);
+}
+.widget-square:hover .w-icon {
+  transform: scale(1.12) rotate(-5deg);
+}
+.w-label {
+  font-size: 0.42rem;
+  color: var(--text-3);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.w-desc {
+  font-size: 0.52rem;
+  color: var(--text-2);
+  font-weight: 500;
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* ═══ 入场动画序列 ═══ */
+.status-bar {
+  opacity: 0;
+  animation: fadeIn 0.3s 0.05s ease forwards;
+}
+.hero-card {
+  opacity: 0;
+  animation: fadeUp 0.45s 0.08s var(--ease) forwards;
+}
+.widget-row {
+  opacity: 0;
+  animation: fadeUp 0.4s 0.18s var(--ease) forwards;
+}
+.app-grid {
+  opacity: 0;
+  animation: fadeUp 0.4s 0.25s var(--ease) forwards;
+}
+.dock {
+  opacity: 0;
+  animation: fadeUp 0.35s 0.35s var(--ease) forwards;
+}
+
+/* 每个 app 图标单独弹入 */
+.app-cell {
+  opacity: 0;
+  animation: appIconIn 0.35s var(--ease-bounce) forwards;
+}
+.app-cell:nth-child(1) { animation-delay: 0.28s; }
+.app-cell:nth-child(2) { animation-delay: 0.31s; }
+.app-cell:nth-child(3) { animation-delay: 0.34s; }
+.app-cell:nth-child(4) { animation-delay: 0.37s; }
+.app-cell:nth-child(5) { animation-delay: 0.40s; }
+.app-cell:nth-child(6) { animation-delay: 0.43s; }
+.app-cell:nth-child(7) { animation-delay: 0.46s; }
+.app-cell:nth-child(8) { animation-delay: 0.49s; }
+
+@keyframes appIconIn {
+  from {
+    opacity: 0;
+    transform: scale(0.5) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* ═══ 图标按压反馈 ═══ */
+.app-cell:active .app-icon-wrap {
+  transform: scale(0.82) !important;
+  transition: transform 0.08s ease !important;
+}
+.app-cell .app-icon-wrap {
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+/* Dock 按压 */
+.dock-item:active svg {
+  transform: scale(0.85) !important;
+  transition: transform 0.08s ease !important;
+}
+
+/* ═══ Hero 呼吸光 ═══ */
+.hero-avatar-ring::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from 0deg,
+    rgba(200,180,180,0.3),
+    rgba(180,160,200,0.15),
+    rgba(200,180,180,0.3)
+  );
+  opacity: 0;
+  animation: heroGlow 3s ease-in-out 1s forwards;
+  z-index: -1;
+}
+@keyframes heroGlow {
+  0% { opacity: 0; transform: rotate(0deg); }
+  30% { opacity: 0.6; }
+  100% { opacity: 0.4; transform: rotate(360deg); }
+}
+
+/* ═══ Modal 打开优化 ═══ */
+.modal-overlay {
+  transition: opacity 0.2s ease;
+}
+.modal-overlay .modal-panel {
+  transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1), opacity 0.2s ease;
+  transform: translateY(20px);
+}
+.modal-overlay.active .modal-panel {
+  transform: translateY(0);
+}
