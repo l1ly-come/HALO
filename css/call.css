@@ -1,0 +1,214 @@
+/* ═══════════════════════════════════
+   Simulated Call — iOS Style
+═══════════════════════════════════ */
+
+.call-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(1.04);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.call-overlay.call-show {
+  opacity: 1;
+  transform: scale(1);
+}
+.call-overlay.call-hide {
+  opacity: 0;
+  transform: scale(0.96);
+}
+
+/* 背景 — 深色磨砂 */
+.call-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 30%, rgba(80,60,100,0.4), transparent 60%),
+    radial-gradient(ellipse at 70% 70%, rgba(60,80,100,0.3), transparent 50%),
+    #0a0a0e;
+  z-index: 0;
+}
+
+.call-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: calc(env(safe-area-inset-top, 0px) + 40px) 24px calc(env(safe-area-inset-bottom, 0px) + 30px);
+}
+
+/* ── 顶部状态 ── */
+.call-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: auto;
+}
+.call-status {
+  font-size: 13px;
+  color: rgba(255,255,255,0.45);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: lowercase;
+  animation: callPulseText 2s ease-in-out infinite;
+}
+@keyframes callPulseText {
+  0%, 100% { opacity: 0.45; }
+  50% { opacity: 0.8; }
+}
+.call-timer {
+  font-size: 15px;
+  color: rgba(255,255,255,0.7);
+  font-weight: 300;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.06em;
+}
+
+/* ── 头像 + 脉冲环 ── */
+.call-avatar-area {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.call-avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255,255,255,0.08);
+  position: relative;
+  z-index: 2;
+}
+.call-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,0.06);
+  animation: callRingPulse 2.5s ease-out infinite;
+}
+.call-ring-2 { animation-delay: 0.8s; }
+.call-ring-3 { animation-delay: 1.6s; }
+.call-ring-stop { animation: none !important; opacity: 0 !important; }
+
+@keyframes callRingPulse {
+  0% { transform: scale(1); opacity: 0.4; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+/* ── 名字 ── */
+.call-name {
+  font-size: 22px;
+  font-weight: 300;
+  color: #fff;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+
+/* ── 字幕区 ── */
+.call-subtitle-area {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 300px;
+  min-height: 80px;
+}
+.call-subtitle {
+  font-size: 14px;
+  color: rgba(255,255,255,0.65);
+  text-align: center;
+  line-height: 1.65;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  max-width: 100%;
+  word-break: break-word;
+}
+
+/* ── 底部操作 ── */
+.call-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 36px;
+  margin-top: auto;
+  padding-bottom: 10px;
+}
+.call-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgba(255,255,255,0.6);
+  transition: all 0.15s;
+}
+.call-btn span {
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+}
+.call-btn svg {
+  width: 52px;
+  height: 52px;
+  padding: 14px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  transition: background 0.15s;
+}
+.call-btn:active svg {
+  transform: scale(0.92);
+}
+.call-btn-active svg {
+  background: rgba(255,255,255,0.2) !important;
+}
+
+/* 挂断按钮 */
+.call-btn-end svg {
+  background: #e74c5e !important;
+  padding: 14px;
+}
+.call-btn-end:active svg {
+  background: #c43a4a !important;
+}
+.call-btn-end {
+  color: #fff;
+}
+/* ── 通话输入区 ── */
+.call-input-area {
+  width: 100%;
+  max-width: 300px;
+  padding: 0 20px;
+  margin-bottom: 12px;
+  animation: fadeUp 0.2s ease;
+}
+.call-input {
+  width: 100%;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px;
+  padding: 10px 16px;
+  font-size: 14px;
+  color: #fff;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.2s, background 0.2s;
+}
+.call-input::placeholder { color: rgba(255,255,255,0.25); }
+.call-input:focus { border-color: rgba(255,255,255,0.25); background: rgba(255,255,255,0.12); }
